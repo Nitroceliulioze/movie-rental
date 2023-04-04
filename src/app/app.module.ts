@@ -10,6 +10,7 @@ import { SigninComponent } from './components/signin/signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from './components/button/button.component';
 import { RegisterComponent } from './components/register/register.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { RegisterComponent } from './components/register/register.component';
     SigninComponent,
     ButtonComponent,
     RegisterComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

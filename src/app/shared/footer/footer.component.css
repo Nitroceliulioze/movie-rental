@@ -1,0 +1,11 @@
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 4em 2em 1em 2em;
+    color: #FFFFFF;
+    background-color: #363636;
+    /* position: fixed; */
+    /* bottom: 0;
+    width: 100%; */
+}
