@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from './components/button/button.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     ButtonComponent,
     RegisterComponent,
     FooterComponent,
+    HomeComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
