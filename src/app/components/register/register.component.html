@@ -1,0 +1,68 @@
+<div class="form-container">
+    <form [formGroup]="signinForm">
+      <div class="container">
+        <mat-form-field appearance="fill">
+          <mat-label for="email">Enter your email</mat-label>
+          <input
+            id="email"
+            type="email"
+            matInput
+            placeholder="Email"
+            [formControl]="email"
+            required
+          />
+          <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label for="password">Enter your password</mat-label>
+          <input
+            type="password"
+            id="password"
+            matInput
+            placeholder="Password"
+            [formControl]="password"
+            required
+          />
+          <mat-error></mat-error>
+        </mat-form-field>
+        <app-button text="Sign in"></app-button>
+      </div>
+    </form>
+  </div>
+
+  <div class="form-container">
+    <form [formGroup]="registerForm">
+      <div class="container">
+        <mat-form-field class="firstName">
+            <mat-label for="firstName">Name</mat-label>
+            <input id="firstName" type="text" [formControl]="firstName" matInput placeholder="Enter your name" >
+          </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label for="email">Enter your email</mat-label>
+          <input
+            id="email"
+            type="email"
+            matInput
+            placeholder="Email"
+            [formControl]="email"
+            required
+          />
+          <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label for="password">Enter your password</mat-label>
+          <input
+            type="password"
+            id="password"
+            matInput
+            placeholder="Password"
+            [formControl]="password"
+            required
+          />
+          <mat-error></mat-error>
+        </mat-form-field>
+        <app-button text="Sign in"></app-button>
+      </div>
+    </form>
+  </div>
