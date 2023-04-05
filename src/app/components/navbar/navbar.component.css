@@ -10,3 +10,8 @@
 .navbar-item {
     width: 150px;
 }
+
+.mat-toolbar.mat-accent {
+    border-radius: 20px;
+    background: #363636;
+}

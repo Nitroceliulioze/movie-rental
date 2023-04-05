@@ -13,6 +13,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { YourMoviesComponent } from './components/your-movies/your-movies.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     FooterComponent,
     HomeComponent,
     NavbarComponent,
+    YourMoviesComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
