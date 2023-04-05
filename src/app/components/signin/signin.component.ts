@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormGroup,
-  FormControl,
+  FormGroup, 
   FormBuilder,
   Validators,
   AbstractControl,
   ValidatorFn,
   FormArray
 } from '@angular/forms';
+import { User } from 'src/app/user';
 
 @Component({
   selector: 'app-signin',
@@ -15,20 +15,22 @@ import {
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  signinForm!: FormGroup
+  signinForm!: FormGroup;
+  user = new User();
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', Validators.required,)
+  constructor (private fb: FormBuilder) {}
+
  ngOnInit(): void {
-   this.signinForm = new FormGroup({
-    
-   })
+  this.signinForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]]
+  })
  }
   getErrorMessage() {
-    if (this.email.hasError('required') || this.password.hasError('required')) {
+    if (this.signinForm.get('email')?.hasError('required') || this.signinForm.get('password')?.hasError('required')) {
       return 'You must enter a value';
     }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+    return this.signinForm.get('email')?.hasError('email') ? 'Not a valid email' : '';
   }
 }

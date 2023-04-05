@@ -22,3 +22,15 @@
     justify-content: center;
     margin: 2em;
 }
+button {
+    width: 150px;
+}
+.mat-mdc-raised-button:not(:disabled) {
+    background-color: #363636 ;
+    color:white;
+}
+button[disabled] {
+    color:white;
+    background-color: #363636;
+    opacity: 0.7;
+}

@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
 import { SigninComponent } from './components/signin/signin.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ButtonComponent } from './components/button/button.component';
+import { ButtonComponent } from './shared/button/button.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
