@@ -1,2 +1,20 @@
 <app-navbar></app-navbar>
-<p>your-movies works!</p>
+<h2 class="home-name">Your Movies</h2>
+<div class="home-container">
+    <table >
+      <tr>
+          <th>Name</th>
+          <th>Genre</th>
+          <th>Time</th>
+          <th>Price</th>
+        </tr>
+      <tr id="movie-row" *ngFor="let yourMovie of yourMovies">
+        <td>{{ yourMovie.title }}</td>
+        <td>{{ yourMovie.genre }}</td>
+        <td><span class="sign prev" (click)="removeTime()">&#60;</span><span class="time" id="time"> {{ time }} </span><span class="sign next" id="next" (click)="addTime()">&#62;</span></td>
+        <td>{{ yourMovie.price | currency }}</td>
+       
+        <app-button (click)="removeMovie(yourMovie)" class="button-rent" text="Remove"></app-button>
+      </tr>
+    </table>
+  </div>

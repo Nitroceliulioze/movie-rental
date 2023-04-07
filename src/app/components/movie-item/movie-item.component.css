@@ -22,15 +22,3 @@ td {
     width: 1.5em;
 }
 
-.sign {
-    background-color: #363636;
-    color: #FFFFFF;
-    padding-inline: 0.3em;
-    cursor: pointer;
-}
-
-.time {
-    background-color: #FFFFFF;
-    color: #000000;
-    padding-inline: 0.5em;
-}

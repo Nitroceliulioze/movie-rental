@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -16,6 +17,8 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { YourMoviesComponent } from './components/your-movies/your-movies.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { MovieItemComponent } from './components/movie-item/movie-item.component';
+
 
 
 @NgModule({
@@ -30,11 +33,13 @@ import { ProfileComponent } from './components/profile/profile.component';
     NavbarComponent,
     YourMoviesComponent,
     ProfileComponent,
+    MovieItemComponent
+    
   ],
   imports: [
     BrowserModule,
     MaterialModule,
-
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
