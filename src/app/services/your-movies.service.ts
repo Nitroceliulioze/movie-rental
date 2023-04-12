@@ -9,18 +9,12 @@ import { Movie } from '../Movie';
 export class YourMoviesService {
   private apiUrl = 'http://localhost:3000/your-movies'
   yourMovies: any = [];
-  @Input() movie!: Movie;
   @Input() yourMovie!: Movie;
   
   
   constructor(private http: HttpClient) { }
 
-// // add movie padaro array is home movies bet dar nezinau kaip ja idet i serveri
-//   addMovie(movie: any) {
-//     this.yourMovies.push(movie);
-//     //change stock
-//     console.log(this.yourMovies);
-//   }
+
 
 //kol kas hard coded your-movies serveryje
   getMovies(): Observable<Movie[]> {
@@ -29,7 +23,7 @@ export class YourMoviesService {
   
   //nezinau kaip cia issprest: neima yourMovies id, 
   deleteMovie(yourMovie: Movie): Observable<Movie> {
-    console.log(yourMovie)
+    console.log(yourMovie.id)
     //add stock
     const url = `${this.apiUrl}/${this.yourMovie.id}`
     return this.http.delete<Movie>(url)

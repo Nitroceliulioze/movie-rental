@@ -60,5 +60,6 @@ export class YourMovieItemComponent implements OnInit {
 
   removeMovie(yourMovie: Movie) {
     this.deleteMovie.emit(yourMovie);
+    console.log(yourMovie.id)
   }
 }

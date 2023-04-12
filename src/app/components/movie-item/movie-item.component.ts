@@ -14,8 +14,11 @@ export class MovieItemComponent {
   constructor(private moviesService: MovieService) {}
 
   addMovie(movie: any) {
-    this.moviesService.addMovie(movie);
+    if(movie.stock >= 1) {
+      this.moviesService.addMovie(movie);
     alert(`${movie.title} has been adder to Your Movies`);
+    }
+    return    
   }
 
   

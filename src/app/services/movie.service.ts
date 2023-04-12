@@ -12,10 +12,17 @@ export class MovieService {
   @Input() movie!: Movie;
 
   constructor(private http: HttpClient) { }
+
   addMovie(movie: any) {
-    this.yourMovies.push(movie);
+    if (movie.stock >= 1) {
+      this.yourMovies.push(movie);
+      movie.stock = movie.stock - 1
+    } 
+    console.log(movie.stock);
+    return
+    
     //change stock
-    console.log(this.yourMovies);
+    
   }
   
   getMovies(): Observable<Movie[]> {
