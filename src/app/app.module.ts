@@ -18,6 +18,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { YourMoviesComponent } from './components/your-movies/your-movies.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { MovieItemComponent } from './components/movie-item/movie-item.component';
+import { YourMovieItemComponent } from './components/your-movie-item/your-movie-item.component';
 
 
 
@@ -33,7 +34,8 @@ import { MovieItemComponent } from './components/movie-item/movie-item.component
     NavbarComponent,
     YourMoviesComponent,
     ProfileComponent,
-    MovieItemComponent
+    MovieItemComponent,
+    YourMovieItemComponent
     
   ],
   imports: [

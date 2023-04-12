@@ -7,16 +7,15 @@ import { YourMoviesService } from 'src/app/services/your-movies.service';
   templateUrl: './movie-item.component.html',
   styleUrls: ['./movie-item.component.css'],
 })
-export class MovieItemComponent {
-  yourMovies: Movie[] = [];
+export class MovieItemComponent {  
   @Input() movie!: Movie;
-  
+  yourMovies: Movie[] = [];
 
   constructor(private yourMoviesService: YourMoviesService) {}
 
   addMovie(movie: any) {
     this.yourMoviesService.addMovie(movie);
-    window.alert(`${movie.title} has been adder to Your Movies`);
+    alert(`${movie.title} has been adder to Your Movies`);
   }
 
   

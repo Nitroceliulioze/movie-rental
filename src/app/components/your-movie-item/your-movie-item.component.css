@@ -1,0 +1,51 @@
+.main-container {
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.home-container {
+    background-color: white;
+    border-radius:20px
+}
+.home-name {
+    margin: 1em;
+    font-size: 28px;
+}
+table {
+   
+    
+    width: 100%;
+    margin:auto;
+    border-collapse: separate;
+    border-spacing: 0 1em;
+    
+    border-radius: 25px;
+    padding: 3em 7.5em;
+} 
+th,
+td {
+    text-align: left;
+    padding-inline: 2em;
+}
+
+.check-img {
+    margin-left:1.5em;    
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.sign {
+    background-color: #363636;
+    color: #FFFFFF;
+    padding-inline: 0.3em;
+    cursor: pointer;
+}
+
+.time {
+    background-color: #FFFFFF;
+    color: #000000;
+    padding-inline: 0.5em;
+}
