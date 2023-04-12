@@ -10,17 +10,17 @@ export class YourMoviesService {
   private apiUrl = 'http://localhost:3000/your-movies'
   yourMovies: any = [];
   @Input() movie!: Movie;
-  yourMovie!: Movie;
+  @Input() yourMovie!: Movie;
   
   
   constructor(private http: HttpClient) { }
 
-// add movie padaro array is home movies bet dar nezinau kaip ja idet i serveri
-  addMovie(movie: any) {
-    this.yourMovies.push(movie);
-    //change stock
-    console.log(this.yourMovies);
-  }
+// // add movie padaro array is home movies bet dar nezinau kaip ja idet i serveri
+//   addMovie(movie: any) {
+//     this.yourMovies.push(movie);
+//     //change stock
+//     console.log(this.yourMovies);
+//   }
 
 //kol kas hard coded your-movies serveryje
   getMovies(): Observable<Movie[]> {

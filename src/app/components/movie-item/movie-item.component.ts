@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Movie } from '../../Movie';
-import { YourMoviesService } from 'src/app/services/your-movies.service';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-movie-item',
@@ -11,10 +11,10 @@ export class MovieItemComponent {
   @Input() movie!: Movie;
   yourMovies: Movie[] = [];
 
-  constructor(private yourMoviesService: YourMoviesService) {}
+  constructor(private moviesService: MovieService) {}
 
   addMovie(movie: any) {
-    this.yourMoviesService.addMovie(movie);
+    this.moviesService.addMovie(movie);
     alert(`${movie.title} has been adder to Your Movies`);
   }
 
