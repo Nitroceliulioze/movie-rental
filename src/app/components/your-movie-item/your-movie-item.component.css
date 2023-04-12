@@ -15,15 +15,10 @@
     font-size: 28px;
 }
 table {
-   
-    
     width: 100%;
-    margin:auto;
-    border-collapse: separate;
     border-spacing: 0 1em;
-    
-    border-radius: 25px;
-    padding: 3em 7.5em;
+    border-radius: 25px;    
+    table-layout: fixed;
 } 
 th,
 td {

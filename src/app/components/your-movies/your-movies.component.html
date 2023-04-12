@@ -1,5 +1,14 @@
 <app-navbar></app-navbar>
 <div class="main-container">
   <h2 class="home-name">Your Movies</h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Genre</th>
+      <th>Time</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+    </table>
   <app-your-movie-item *ngFor="let yourMovie of yourMovies" [yourMovie]="yourMovie" (deleteMovie)="deleteMovie(yourMovie)"></app-your-movie-item>
 </div>
