@@ -4,9 +4,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: white;
+    width: 80%;
+    margin: 2em auto;
+    border-radius: 25px;
 }
 
 .home-name {
     margin: 1em;
     font-size: 28px;
 }
+table {
+    width: 100%;
+    border-spacing: 0 1em;
+    border-radius: 25px;
+    padding: 1.5em;
+} 

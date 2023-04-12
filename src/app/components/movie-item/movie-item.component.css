@@ -3,12 +3,9 @@
 }
 table {
     width: 100%;
-    margin: 2em auto;
-    border-collapse: separate;
     border-spacing: 0 1em;
-    
     border-radius: 25px;
-    padding: 3em;
+    padding: 1.5em;
 } 
 th,
 td {

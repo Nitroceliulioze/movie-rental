@@ -1,5 +1,14 @@
 <app-navbar></app-navbar>
 <div class="main-container">
   <h2 class="home-name">Available Movies</h2>
+  <table>
+    <tr>
+        <th>Name</th>
+        <th>Genre</th>
+        <th>Price for 12h</th>
+        <th>Is in stock</th>
+      </tr>
+    </table>
       <app-movie-item *ngFor="let movie of movies" [movie]="movie"></app-movie-item>
+      
 </div>
