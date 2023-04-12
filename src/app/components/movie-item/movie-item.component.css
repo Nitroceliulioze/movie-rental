@@ -1,16 +1,17 @@
 .home-container {
     background-color: white;
+    border-radius: 25px;
 }
 table {
     width: 100%;
     border-spacing: 0 1em;
-    border-radius: 25px;
-    padding: 1.5em;
+    table-layout: fixed;
 } 
 th,
 td {
     text-align: left;
     padding-inline: 2em;
+    
 }
 
 .check-img {

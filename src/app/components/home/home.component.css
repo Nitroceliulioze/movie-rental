@@ -8,6 +8,7 @@
     width: 80%;
     margin: 2em auto;
     border-radius: 25px;
+    padding: 1em;
 }
 
 .home-name {
@@ -18,5 +19,6 @@ table {
     width: 100%;
     border-spacing: 0 1em;
     border-radius: 25px;
-    padding: 1.5em;
+    
+    table-layout: fixed;
 } 
