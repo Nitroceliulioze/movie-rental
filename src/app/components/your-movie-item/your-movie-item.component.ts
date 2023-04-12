@@ -13,10 +13,9 @@ export class YourMovieItemComponent implements OnInit {
   yourMovies!: Movie[];
   time: number = 12;
   count: number = 1;
-  originalPrice!: number;  
+  originalPrice!: number;
   countDiff!: number;
-  newPrice: number = this.yourMovie.price;
-  
+  newPrice!: number;
 
   constructor(private yourMoviesService: YourMoviesService) {}
 
@@ -24,14 +23,14 @@ export class YourMovieItemComponent implements OnInit {
   addYourMovie() {}
 
   addTime() {
-    const originalPrice = this.yourMovie.price
-    this.count = this.count + 1; 
-    const countDiff = this.count - 1
-    const newPrice = originalPrice + (originalPrice * countDiff);
-    this.yourMovie.price = newPrice
+    const originalPrice = this.yourMovie.price;
+    this.count = this.count + 1;
+    const countDiff = this.count - 1;
+    const newPrice = originalPrice + originalPrice * countDiff;
+    this.yourMovie.price = newPrice;
     this.yourMovie.price = originalPrice;
-    console.log(newPrice)
-    console.log(originalPrice)
+    console.log(newPrice);
+    console.log(originalPrice);
 
     if (this.time < 168) {
       this.time += 12;
@@ -40,10 +39,19 @@ export class YourMovieItemComponent implements OnInit {
     }
   }
 
-
   removeTime() {
-    
-    if (this.time > 0) {
+    const originalPrice = this.yourMovie.price;
+    if (this.count >= 2) {
+      this.count = this.count - 1;
+      const countDiff = this.count - 1;
+      const newPrice = originalPrice + originalPrice * countDiff;
+      this.yourMovie.price = newPrice;
+      this.yourMovie.price = originalPrice;
+      console.log(newPrice);
+      console.log(originalPrice);
+    } 
+
+    if (this.time > 12) {
       this.time -= 12;
     } else if (this.time === 12) {
       return;
