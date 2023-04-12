@@ -1,4 +1,4 @@
-<div class="form-container">
+<!-- <div class="form-container">
   <form (ngSubmit)="save()" [formGroup]="signinForm">
     <div class="container">
       <mat-form-field appearance="fill">
@@ -47,10 +47,10 @@
       >
         Sign In
       </button>
-      <!-- <app-button mat-button text="Sign in" type="submit" routerLink="/home" ></app-button> -->
-    </div>
+      <app-button mat-button text="Sign in" type="submit" routerLink="/home" ></app-button> -->
+    <!-- </div>
   </form>
-</div>
+</div> -->
 
 <!-- REGISTER -->
 
@@ -170,7 +170,7 @@
       <!-- <app-button type="submit" text="Register" routerLink="/home"></app-button> -->
       <button
         mat-raised-button
-        [disabled]="signinForm.invalid"
+        [disabled]="registerForm.invalid"
         routerLink="/home"
       >
         Register

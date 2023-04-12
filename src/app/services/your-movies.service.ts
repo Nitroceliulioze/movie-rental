@@ -1,6 +1,6 @@
 import { Injectable, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Movie } from '../Movie';
 
 @Injectable({
@@ -9,12 +9,19 @@ import { Movie } from '../Movie';
 export class YourMoviesService {
   private apiUrl = 'http://localhost:3000/your-movies'
   yourMovies: any = [];
-  @Input() yourMovie!: Movie;
-  
+  @Input() movie!: Movie;
+  yourMovie!: Movie;
   
   constructor(private http: HttpClient) { }
 
-
+  addMovie(movie: Movie): Observable<Movie> {
+    return this.http.post<Movie>(this.apiUrl, movie).pipe(
+      tap((newMovie) => {
+        this.yourMovies.push(newMovie);
+        console.log(this.yourMovies);
+      })
+    );
+  }
 
 //kol kas hard coded your-movies serveryje
   getMovies(): Observable<Movie[]> {
@@ -25,8 +32,7 @@ export class YourMoviesService {
   deleteMovie(yourMovie: Movie): Observable<Movie> {
     console.log(yourMovie.id)
     //add stock
-    const url = `${this.apiUrl}/${this.yourMovie.id}`
+    const url = `${this.apiUrl}/${yourMovie.id}`
     return this.http.delete<Movie>(url)
-  }
-  
+  }  
 }

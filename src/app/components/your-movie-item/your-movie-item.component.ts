@@ -12,25 +12,24 @@ export class YourMovieItemComponent implements OnInit {
   @Output() deleteMovie: EventEmitter<Movie> = new EventEmitter();
   yourMovies!: Movie[];
   time: number = 12;
-  count: number = 1;
-  originalPrice!: number;
-  countDiff!: number;
   newPrice!: number;
 
   constructor(private yourMoviesService: YourMoviesService) {}
 
   ngOnInit(): void {}
+
+  ngOnChanges(): void {
+    if (this.yourMovie) {
+      this.newPrice = this.yourMovie.price;
+    }
+  }
   addYourMovie() {}
 
-  addTime() {
-    const originalPrice = this.yourMovie.price;
-    this.count = this.count + 1;
-    const countDiff = this.count - 1;
-    const newPrice = originalPrice + originalPrice * countDiff;
-    this.yourMovie.price = newPrice;
-    this.yourMovie.price = originalPrice;
+  addTime() { 
+    const newPrice = this.newPrice + this.yourMovie.price;
+    this.newPrice = newPrice
     console.log(newPrice);
-    console.log(originalPrice);
+    
 
     if (this.time < 168) {
       this.time += 12;
@@ -40,16 +39,16 @@ export class YourMovieItemComponent implements OnInit {
   }
 
   removeTime() {
-    const originalPrice = this.yourMovie.price;
-    if (this.count >= 2) {
-      this.count = this.count - 1;
-      const countDiff = this.count - 1;
-      const newPrice = originalPrice + originalPrice * countDiff;
-      this.yourMovie.price = newPrice;
-      this.yourMovie.price = originalPrice;
-      console.log(newPrice);
-      console.log(originalPrice);
-    } 
+    // const originalPrice = this.yourMovie.price;
+    // if (this.count >= 2) {
+    //   this.count = this.count - 1;
+    //   const countDiff = this.count - 1;
+    //   const newPrice = originalPrice + originalPrice * countDiff;
+    //   this.yourMovie.price = newPrice;
+    //   this.yourMovie.price = originalPrice;
+    //   console.log(newPrice);
+    //   console.log(originalPrice);
+    // }
 
     if (this.time > 12) {
       this.time -= 12;
@@ -60,7 +59,7 @@ export class YourMovieItemComponent implements OnInit {
 
   removeMovie(yourMovie: Movie) {
     this.deleteMovie.emit(yourMovie);
-    console.log(yourMovie.id)
+    console.log(yourMovie.id);
     // add stock
   }
 }

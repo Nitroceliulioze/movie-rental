@@ -45,7 +45,6 @@ function passwordMatcher(
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  signinForm!: FormGroup;
   user = new User();
 
   private validationMessages: { [key: string]: { [key: string]: string } };
@@ -82,11 +81,6 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.signinForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-    });
-
     this.registerForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       surname: ['', [Validators.required, Validators.minLength(2)]],
@@ -114,8 +108,6 @@ export class RegisterComponent implements OnInit {
 
   getErrorMessage() {
     if (
-      this.signinForm.get('email')?.hasError('required') ||
-      this.signinForm.get('password')?.hasError('required') ||
       this.registerForm.get('firstName')?.hasError('required') ||
       this.registerForm.get('surname')?.hasError('required') ||
       this.registerForm.get('registerEmailGroup.email1')?.hasError('required') ||
@@ -126,7 +118,6 @@ export class RegisterComponent implements OnInit {
       return 'You must enter a value';
     }
     if (
-      this.signinForm.get('email')?.hasError('email') ||
       this.registerForm.get('registerEmailGroup.email1')?.hasError('email')
     ) {
       return 'Not a valid email';
@@ -138,7 +129,6 @@ export class RegisterComponent implements OnInit {
       return 'Entry must be at least 2 characters';
     }
     if (
-      this.signinForm.get('password')?.hasError('minLenght') ||
       this.registerForm.get('registerPasswordGroup.password1')?.hasError('minLenght')
     ) {
       return 'Password must be at least 8 characters long';
