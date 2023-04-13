@@ -25,15 +25,19 @@ export class YourMovieItemComponent implements OnInit {
   }
   addYourMovie() {}
 
-  addTime() { 
-    const newPrice = this.newPrice + this.yourMovie.price;
-    this.newPrice = newPrice
-    console.log(newPrice);
-    
-
-    if (this.time < 168) {
-      this.time += 12;
-    } else if (this.time === 168) {
+  addTime() {
+    if (this.yourMovie.stock >= 1) {
+      const newPrice = this.newPrice + this.yourMovie.price;
+      this.newPrice = newPrice;
+      console.log(newPrice);
+      this.yourMovie.stock = this.yourMovie.stock - 1;
+      console.log(this.yourMovie.stock);
+      if (this.time < 168) {
+        this.time += 12;
+      } else if (this.time === 168) {
+        return;
+      }
+    } else if ((this.yourMovie.stock = 0)) {
       return;
     }
   }

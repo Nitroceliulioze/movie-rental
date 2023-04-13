@@ -73,11 +73,11 @@
       "stock": 21
     },
     {
-      "id": 5,
-      "title": "Aladdin",
-      "genre": "Animation",
-      "price": 4,
-      "stock": 4
+      "id": 4,
+      "title": "Little mermaid",
+      "genre": "Amination",
+      "price": 3.5,
+      "stock": 5
     }
   ],
   "users": [
