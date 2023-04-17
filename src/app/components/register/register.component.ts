@@ -5,12 +5,13 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/user';
 
 function emailMatcher(c: AbstractControl): { [key: string]: boolean } | null {
-  const emailControl = c.get('email1');
-  const confirmControl = c.get('email2');
+  const emailControl = c.get('email');
+  const confirmControl = c.get('confirmEmail');
 
   if (emailControl?.pristine || confirmControl?.pristine) {
     return null;
@@ -25,8 +26,8 @@ function emailMatcher(c: AbstractControl): { [key: string]: boolean } | null {
 function passwordMatcher(
   c: AbstractControl
 ): { [key: string]: boolean } | null {
-  const passwordControl = c.get('password1');
-  const confirmPassControl = c.get('password2');
+  const passwordControl = c.get('password');
+  const confirmPassControl = c.get('confirmPassword');
 
   if (passwordControl?.pristine || confirmPassControl?.pristine) {
     return null;
@@ -47,38 +48,11 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   user = new User();
 
-  private validationMessages: { [key: string]: { [key: string]: string } };
-
-  constructor(private fb: FormBuilder) {
-    this.validationMessages = {
-      email: {
-        required: 'Email is required.',
-        email: 'Not a valid email',
-      },
-      password: {
-        required: 'Password is required.',
-        minlength: 'Product name must be at least eight characters.'
-      },
-      firstName: {
-        required: 'Name is required.',
-        minlength: 'Name must be at least two characters.'
-      },
-      surname: {
-        required: 'Surname is required.',
-        minlength: 'Name must be at least two characters.'
-      },
-      registerEmailGroup: {
-        required:'Email is required.',
-        email: 'Not a valid email',
-        match: 'Email does not match'
-      },
-      registerPasswordGroup: {
-        required: 'Password is required.',
-        minlength: 'Product name must be at least eight characters.',
-        match: 'Password does not match'
-      }
-    };
-  }
+  constructor(
+    private fb: FormBuilder,
+    private service: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -86,15 +60,15 @@ export class RegisterComponent implements OnInit {
       surname: ['', [Validators.required, Validators.minLength(2)]],
       registerEmailGroup: this.fb.group(
         {
-          email1: ['', [Validators.required, Validators.email]],
-          email2: ['', [Validators.required]],
+          email: ['', [Validators.required, Validators.email]],
+          confirmEmail: ['', [Validators.required]],
         },
         { validators: emailMatcher }
       ),
       registerPasswordGroup: this.fb.group(
         {
-          password1: ['', [Validators.required, Validators.minLength(8)]],
-          password2: ['', Validators.required],
+          password: ['', [Validators.required, Validators.minLength(8)]],
+          confirmPassword: ['', Validators.required],
         },
         { validators: passwordMatcher }
       ),
@@ -102,43 +76,87 @@ export class RegisterComponent implements OnInit {
   }
 
   save() {
-    console.log(this.registerForm);
-    console.log('Saved: ' + JSON.stringify(this.registerForm.value));
+    if (this.registerForm.valid) {
+      const newUser = {
+        id: Number(''),
+        firstName: this.registerForm.value.firstName,
+        surname: this.registerForm.value.surname,
+        email: this.registerForm.value.registerEmailGroup.email,
+        confirmEmail: this.registerForm.value.registerEmailGroup.confirmEmail,
+        password: this.registerForm.value.registerPasswordGroup.password,
+        confirmPassword: this.registerForm.value.registerPasswordGroup.confirmPassword,
+      };
+
+      console.log(newUser)
+
+     this.service.saveUser(newUser).subscribe(() => {
+        alert(`${newUser.firstName} has been registered`);
+        this.router.navigate(['/welcome'])
+      });
+    }
   }
 
-  getErrorMessage() {
-    if (
-      this.registerForm.get('firstName')?.hasError('required') ||
-      this.registerForm.get('surname')?.hasError('required') ||
-      this.registerForm.get('registerEmailGroup.email1')?.hasError('required') ||
-      this.registerForm.get('registerEmailGroup.email2')?.hasError('required') ||
-      this.registerForm.get('registerPasswordGroup.password1')?.hasError('required') ||
-      this.registerForm.get('registerPasswordGroup.password2')?.hasError('required')
-    ) {
-      return 'You must enter a value';
+  getErrorMessage(): string[] {
+    const messages: string[] = [];
+
+    const firstNameControl = this.registerForm.get('firstName');
+    if (firstNameControl?.hasError('required')) {
+      messages.push('First name is required.');
     }
-    if (
-      this.registerForm.get('registerEmailGroup.email1')?.hasError('email')
-    ) {
-      return 'Not a valid email';
+    if (firstNameControl?.hasError('minlength')) {
+      messages.push('First name must be at least 2 characters long.');
     }
-    if (
-      this.registerForm.get('firstName')?.hasError('minLength') ||
-      this.registerForm.get('surname')?.hasError('minLength')
-    ) {
-      return 'Entry must be at least 2 characters';
+
+    const surnameControl = this.registerForm.get('surname');
+    if (surnameControl?.hasError('required')) {
+      messages.push('Surname is required.');
     }
-    if (
-      this.registerForm.get('registerPasswordGroup.password1')?.hasError('minLenght')
-    ) {
-      return 'Password must be at least 8 characters long';
+    if (surnameControl?.hasError('minlength')) {
+      messages.push('Surname must be at least 2 characters long.');
     }
-    if (this.registerForm.get('registerEmailGroup.email2')?.hasError('match')) {
-      return 'Email does not match';
+
+    const email1Control = this.registerForm.get('registerEmailGroup.email');
+    if (email1Control?.hasError('required')) {
+      messages.push('Email is required.');
     }
-    if (this.registerForm.get('registerPasswordGroup.password2')?.hasError('match')) {
-      return 'Password does not match';
+    if (email1Control?.hasError('email')) {
+      messages.push('Email is not valid.');
     }
-    return '';
+
+    const email2Control = this.registerForm.get(
+      'registerEmailGroup.confirmEmail'
+    );
+    if (email2Control?.hasError('required')) {
+      messages.push('Confirm email is required.');
+    }
+
+    const passwordControl = this.registerForm.get(
+      'registerPasswordGroup.password'
+    );
+    if (passwordControl?.hasError('required')) {
+      messages.push('Password is required.');
+    }
+    if (passwordControl?.hasError('minlength')) {
+      messages.push('Password must be at least 8 characters long.');
+    }
+
+    const password2Control = this.registerForm.get(
+      'registerPasswordGroup.confirmPassword'
+    );
+    if (password2Control?.hasError('required')) {
+      messages.push('Confirm password is required.');
+    }
+
+    const emailGroupControl = this.registerForm.get('registerEmailGroup');
+    if (emailGroupControl?.errors?.['emailMatcher']) {
+      messages.push('Emails do not match.');
+    }
+
+    const passwordGroupControl = this.registerForm.get('registerPasswordGroup');
+    if (passwordGroupControl?.errors?.['passwordMatcher']) {
+      messages.push('Passwords do not match.');
+    }
+
+    return messages;
   }
 }

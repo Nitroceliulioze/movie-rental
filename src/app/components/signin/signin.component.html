@@ -1,5 +1,5 @@
 <div class="form-container">
-  <form [formGroup]="signinForm">
+  <form [formGroup]="signinForm" (ngSubmit)="onSignin()">
     <div class="container">
       <mat-form-field appearance="fill">
         <mat-label for="email">Enter your email</mat-label>

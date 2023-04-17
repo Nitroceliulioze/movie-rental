@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormGroup, 
   FormBuilder,
-  Validators,
-  AbstractControl,
-  ValidatorFn,
-  FormArray
+  Validators
 } from '@angular/forms';
 import { User } from 'src/app/user';
 
@@ -16,7 +13,7 @@ import { User } from 'src/app/user';
 })
 export class SigninComponent implements OnInit {
   signinForm!: FormGroup;
-  user = new User();
+  user: User = new User();
 
   constructor (private fb: FormBuilder) {}
 
@@ -32,5 +29,9 @@ export class SigninComponent implements OnInit {
     }
 
     return this.signinForm.get('email')?.hasError('email') ? 'Not a valid email' : '';
+  }
+
+  onSignin() {
+    
   }
 }

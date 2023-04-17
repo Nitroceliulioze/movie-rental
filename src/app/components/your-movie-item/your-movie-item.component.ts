@@ -29,7 +29,7 @@ export class YourMovieItemComponent implements OnInit {
     if (this.yourMovie.stock >= 1) {
       const newPrice = this.newPrice + this.yourMovie.price;
       this.newPrice = newPrice;
-      console.log(newPrice);
+      // needs update in server
       this.yourMovie.stock = this.yourMovie.stock - 1;
       console.log(this.yourMovie.stock);
       if (this.time < 168) {
@@ -43,19 +43,16 @@ export class YourMovieItemComponent implements OnInit {
   }
 
   removeTime() {
-    // const originalPrice = this.yourMovie.price;
-    // if (this.count >= 2) {
-    //   this.count = this.count - 1;
-    //   const countDiff = this.count - 1;
-    //   const newPrice = originalPrice + originalPrice * countDiff;
-    //   this.yourMovie.price = newPrice;
-    //   this.yourMovie.price = originalPrice;
-    //   console.log(newPrice);
-    //   console.log(originalPrice);
-    // }
+    // needs update in server
 
     if (this.time > 12) {
       this.time -= 12;
+      const newPrice = this.newPrice - this.yourMovie.price;
+      this.newPrice = newPrice;
+      console.log(newPrice);
+      this.yourMovie.stock = this.yourMovie.stock + 1;
+      console.log(this.yourMovie.stock);
+
     } else if (this.time === 12) {
       return;
     }
@@ -63,7 +60,5 @@ export class YourMovieItemComponent implements OnInit {
 
   removeMovie(yourMovie: Movie) {
     this.deleteMovie.emit(yourMovie);
-    console.log(yourMovie.id);
-    // add stock
   }
 }
