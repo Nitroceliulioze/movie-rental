@@ -16,11 +16,14 @@ export class YourMoviesService {
 
   addMovie(movie: Movie): Observable<Movie> {
     if (movie.stock >= 1) {
+      console.log(movie.stock)
+      movie.stock = movie.stock - 1;
       return this.http.post<Movie>(this.apiUrl, movie).pipe(
         tap((newMovie) => {
           this.yourMovies.push(newMovie);
         })
       );
+      
     } else {
       const error = new Error('Stock is less than zero, cannot add movie');
       alert(`Sorry, we're out of stock`);

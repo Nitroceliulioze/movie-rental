@@ -12,7 +12,7 @@
       "title": "Superman",
       "genre": "Action",
       "price": 4.55,
-      "stock": 3
+      "stock": 4
     },
     {
       "id": 3,
@@ -76,6 +76,15 @@
       "confirmEmail": "marius@marius.lt",
       "password": "diana123",
       "confirmPassword": "diana123"
+    },
+    {
+      "id": 3,
+      "firstName": "Monika",
+      "surname": "Kukul",
+      "email": "test@test.com",
+      "confirmEmail": "test@test.com",
+      "password": "test1234",
+      "confirmPassword": "test1234"
     }
   ]
 }

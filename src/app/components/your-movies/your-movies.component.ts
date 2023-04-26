@@ -15,10 +15,12 @@ export class YourMoviesComponent implements OnInit {
   ngOnInit(): void {
     this.yourMoviesService
       .getMovies()
-      .subscribe((yourMovies: any) => (this.yourMovies = yourMovies));
+      .subscribe((yourMovies: Movie[]) => (this.yourMovies = yourMovies));
   }
 
   deleteMovie(yourMovie: Movie) {
+    console.log(yourMovie.stock)
+    yourMovie.stock = yourMovie.stock + 1;
     console.log(yourMovie.id);
     this.yourMoviesService
       .deleteMovie(yourMovie)
@@ -27,6 +29,8 @@ export class YourMoviesComponent implements OnInit {
           (this.yourMovies = this.yourMovies.filter(
             (m) => m.id !== yourMovie.id
           ))
+          
       );
+      
   }
 }

@@ -6,4 +6,5 @@ export class User {
     confirmEmail!: string;
     password!: string;
     confirmPassword!: string
+  
 }

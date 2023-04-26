@@ -14,26 +14,9 @@ import { Movie } from '../Movie';
 })
 export class MovieService {
   private apiUrl = 'http://localhost:3000/movies';
-  // yourMovies: any = [];
   @Input() movie!: Movie;
 
   constructor(private http: HttpClient) {}
-
-  // // //nededa i serveri dar kol kas
-  // postYourMovie(): Observable<Movie> {
-  //   return this.http.post<Movie>(this.yourMoviesUrl, this.movie, httpOptions);
-  // }
-  // addMovie() {this.postYourMovie()}
-
- 
-  // addMovie(movie: any) {
-  //   if (movie.stock >= 1) {
-  //     this.yourMovies.push(movie);
-  //     movie.stock = movie.stock - 1;
-  //   }
-  //   console.log(this.yourMovies);
-  //   return;
-  // }
 
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(this.apiUrl);
