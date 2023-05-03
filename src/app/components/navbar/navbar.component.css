@@ -15,3 +15,7 @@
     border-radius: 20px;
     background: #363636;
 }
+
+#logout {
+    flex-grow: 1;
+}
