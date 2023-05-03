@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { YourMoviesComponent } from './components/your-movies/your-movies.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+import { EditGuard } from './components/edit.guard';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'edit',
+    canDeactivate: [EditGuard],
     component: ProfileEditComponent,
   },
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
