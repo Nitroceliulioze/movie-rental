@@ -26,16 +26,25 @@ export class SigninComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
-  getErrorMessage() {
-    if (
-      this.signinForm.get('email')?.hasError('required') ||
-      this.signinForm.get('password')?.hasError('required')
-    ) {
+
+  getEmailErrorMessage() {
+    if (this.signinForm.get('email')?.hasError('required')) {
       return 'You must enter a value';
     }
 
     return this.signinForm.get('email')?.hasError('email')
       ? 'Not a valid email'
+      : '';
+  }
+
+  getPasswordErrorMessage() {
+    console.log(this.signinForm.get('password')?.errors);
+    if (this.signinForm.get('password')?.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.signinForm.get('password')?.hasError('minlength')
+      ? 'Password must be at least 8 characters long.'
       : '';
   }
 
@@ -47,7 +56,7 @@ export class SigninComponent implements OnInit {
       next: (users: any) => {
         const user = users[0];
         console.log(user);
-        console.log(user.password, this.signinForm.value.password)
+        console.log(user.password, this.signinForm.value.password);
         if (user.password === this.signinForm.value.password) {
           sessionStorage.setItem('email', user.email);
           sessionStorage.setItem('password', user.password);
@@ -55,10 +64,7 @@ export class SigninComponent implements OnInit {
           this.router.navigate(['/home']);
         }
       },
-      error: err => console.log(err)
+      error: (err) => console.log(err),
     });
-    
-    
   }
-  
 }

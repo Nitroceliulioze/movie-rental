@@ -11,7 +11,9 @@
           formControlName="email"
 
         />
-        <mat-error *ngIf="signinForm.get('email')?.invalid">{{ getErrorMessage() }}</mat-error>
+        <mat-error *ngIf="signinForm.get('email')?.invalid &&
+        (signinForm.get('email')?.touched ||
+          signinForm.get('email')?.dirty)">{{ getEmailErrorMessage() }}</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
@@ -23,10 +25,11 @@
           placeholder="Password"
           formControlName="password"
         />
-        <mat-error *ngIf="signinForm.get('password')?.invalid">{{ getErrorMessage() }}</mat-error>
+        <mat-error *ngIf="signinForm.get('password')?.invalid &&
+        (signinForm.get('password')?.touched ||
+          signinForm.get('password')?.dirty)">{{ getPasswordErrorMessage() }}</mat-error>
       </mat-form-field>
       <button mat-raised-button [disabled]="signinForm.invalid" type="submit">Sign In</button>
-      <!-- <app-button text="Sign in" routerLink="/home"></app-button> -->
     </div>
   </form>
 </div>
