@@ -10,23 +10,24 @@
         />
       </div>
       <div class="profile-info">
-        <div class="line" id="fname"><strong>Name: {{ name }}</strong></div>
-        <div class="line" id="lname"><strong>Surname: {{ surname }} </strong></div>
-        <div class="line" id="e-mail"><strong>Email: {{ email }} </strong></div>
+        <div class="line" id="fname">
+          <strong>Name: {{ name }}</strong>
+        </div>
+        <div class="line" id="lname">
+          <strong>Surname: {{ surname }} </strong>
+        </div>
+        <div class="line" id="e-mail">
+          <strong>Email: {{ email }} </strong>
+        </div>
       </div>
     </div>
     <div class="buttons-container">
-      <app-button class="profile-btn1" id="reset-pass-btn" text="Reset password"
-        >Reset password</app-button
-      >
       <app-button
-        type="submit"
-        class="profile-btn2"
-        id="reset-email-btn"
-        text="Reset email"
-      >
-        Reset email
-      </app-button>
+        class="profile-btn1"
+        id="reset-pass-btn"
+        text="Edit"
+        routerLink="/edit"
+      ></app-button>
     </div>
   </div>
 </div>

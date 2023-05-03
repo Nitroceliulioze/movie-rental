@@ -129,9 +129,9 @@ export class RegisterComponent implements OnInit {
   }
 
   getConfirmEmailErrorMessage() {
-    // if (this.registerForm.get('registerEmailGroup.confirmEmail')?.hasError('required')) {
-    //   return 'You must enter a value';
-    // }
+    if (this.registerForm.get('registerEmailGroup.confirmEmail')?.hasError('required')) {
+      return 'You must enter a value';
+    }
     if (this.registerForm.get('registerEmailGroup')?.hasError('match')) {
       ('Emails do not match.');
     }

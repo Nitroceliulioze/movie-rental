@@ -19,6 +19,7 @@ import { YourMoviesComponent } from './components/your-movies/your-movies.compon
 import { ProfileComponent } from './components/profile/profile.component';
 import { MovieItemComponent } from './components/movie-item/movie-item.component';
 import { YourMovieItemComponent } from './components/your-movie-item/your-movie-item.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 
 
 
@@ -35,7 +36,8 @@ import { YourMovieItemComponent } from './components/your-movie-item/your-movie-
     YourMoviesComponent,
     ProfileComponent,
     MovieItemComponent,
-    YourMovieItemComponent
+    YourMovieItemComponent,
+    ProfileEditComponent
     
   ],
   imports: [

@@ -1,0 +1,50 @@
+<div class="form-container">
+  <form novalidate (ngSubmit)="updateUser()" [formGroup]="editForm">
+    <div class="container">
+      <mat-form-field appearance="fill">
+        <mat-label>Edit your name</mat-label>
+        <input matInput formControlName="firstName" />
+        <mat-error *ngIf="this.editForm.get('firstName')?.invalid">
+          {{ getNameErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Edit your surname</mat-label>
+        <input matInput formControlName="surname" />
+        <mat-error *ngIf="this.editForm.get('surname')?.invalid">
+          {{ getSurnameErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Edit your email</mat-label>
+        <input
+          matInput
+          formControlName="email"
+        />
+        <mat-error *ngIf="this.editForm.get('email')?.invalid">
+          {{ getEmailErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Edit your password</mat-label>
+        <input
+          matInput
+          formControlName="password"
+        />
+        <mat-error *ngIf="this.editForm.get('password')?.invalid">
+          {{ getPasswordErrorMessage() }}
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+      >
+        Save
+      </button>
+    </div>
+  </form>
+</div>
