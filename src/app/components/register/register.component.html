@@ -1,5 +1,5 @@
 <div class="form-container">
-  <form (ngSubmit)="save()" [formGroup]="registerForm">
+  <form novalidate (ngSubmit)="save()" [formGroup]="registerForm">
     <div class="container">
       <mat-form-field class="firstName">
         <mat-label for="firstName">Enter your name</mat-label>
@@ -16,7 +16,7 @@
             (registerForm.get('firstName')?.touched ||
               registerForm.get('firstName')?.dirty)
           "
-          > {{ getErrorMessage() }}</mat-error
+          > {{ getNameErrorMessage() }}</mat-error
         >
       </mat-form-field>
       <mat-form-field class="surame">
@@ -28,7 +28,7 @@
             (registerForm.get('surname')?.touched ||
               registerForm.get('surname')?.dirty)
           "
-          >{{ getErrorMessage() }}</mat-error
+          >{{ getSurnameErrorMessage() }}</mat-error
         >
       </mat-form-field>
 
@@ -40,15 +40,14 @@
             type="email"
             matInput
             formControlName="email"
-            required
           />
           <mat-error
-            *ngIf="
-              registerForm.get('registerEmailGroup.email')?.invalid &&
+            *ngIf="registerForm.get('registerEmailGroup')?.errors ||
+              (registerForm.get('registerEmailGroup.email')?.invalid &&
               (registerForm.get('registerEmailGroup.email')?.touched ||
-                registerForm.get('registerEmailGroup.email')?.dirty)
+                registerForm.get('registerEmailGroup.email')?.dirty))
             "
-            >{{ getErrorMessage() }}</mat-error
+            >{{ getEmailErrorMessage() }}</mat-error
           >
         </mat-form-field>
 
@@ -59,16 +58,15 @@
             type="email"
             matInput
             formControlName="confirmEmail"
-            required
           />
           <mat-error
             *ngIf="
-              registerForm.get('registerEmailGroup') ||
+              registerForm.get('registerEmailGroup')?.errors ||
               (registerForm.get('registerEmailGroup.confirmEmail')?.invalid &&
                 (registerForm.get('registerEmailGroup.confirmEmail')?.touched ||
                   registerForm.get('registerEmailGroup.confirmEmail')?.dirty))
             "
-            >{{ getErrorMessage() }}</mat-error>
+            >{{ getConfirmEmailErrorMessage() }}</mat-error>
         </mat-form-field>
       </div>
 
@@ -80,15 +78,14 @@
             id="password"
             matInput
             formControlName="password"
-            required
           />
           <mat-error
-            *ngIf="
-              registerForm.get('registerPasswordGroup.password')?.invalid &&
+            *ngIf="registerForm.get('registerPasswordGroup')?.errors ||
+              (registerForm.get('registerPasswordGroup.password')?.invalid &&
               (registerForm.get('registerPasswordGroup.password')?.touched ||
-                registerForm.get('registerPasswordGroup.password')?.dirty)
+                registerForm.get('registerPasswordGroup.password')?.dirty))
             "
-            >{{ getErrorMessage() }}</mat-error
+            >{{ getPasswordErrorMessage() }}</mat-error
           >
         </mat-form-field>
 
@@ -99,17 +96,17 @@
             id="confirmPassword"
             matInput
             formControlName="confirmPassword"
-            required
           />
           <mat-error
-            *ngIf="registerForm.get('registerPasswordGroup') ||
+            *ngIf="registerForm.get('registerPasswordGroup')?.errors ||
               (registerForm.get('registerPasswordGroup.confirmPassword')?.invalid &&
               (registerForm.get('registerPasswordGroup.confirmPassword')?.touched ||
                 registerForm.get('registerPasswordGroup.confirmPassword')?.dirty))
             "
-            >{{ getErrorMessage() }}</mat-error
+            >{{ getPasswordConfirmErrorMessage() }}</mat-error
           >
         </mat-form-field>
+        
       </div>
       <button
         mat-raised-button
@@ -124,7 +121,8 @@
 
 <br />Dirty: {{ registerForm.dirty }} <br />Touched: {{ registerForm.touched }}
 <br />Valid: {{ registerForm.valid }} <br />Value:
-{{ registerForm.value | json }} <br/> {{ getErrorMessage() }}
+{{ registerForm.value | json }} <br/> 
+
 
 
 

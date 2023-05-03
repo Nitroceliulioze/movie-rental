@@ -9,10 +9,11 @@
           matInput
           placeholder="Email"
           formControlName="email"
-          required
+
         />
         <mat-error *ngIf="signinForm.get('email')?.invalid">{{ getErrorMessage() }}</mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="fill">
         <mat-label for="password">Enter your password</mat-label>
         <input
@@ -21,7 +22,6 @@
           matInput
           placeholder="Password"
           formControlName="password"
-          required
         />
         <mat-error *ngIf="signinForm.get('password')?.invalid">{{ getErrorMessage() }}</mat-error>
       </mat-form-field>

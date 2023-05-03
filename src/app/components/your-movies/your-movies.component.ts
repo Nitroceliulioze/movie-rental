@@ -19,7 +19,7 @@ export class YourMoviesComponent implements OnInit {
   }
 
   deleteMovie(yourMovie: Movie) {
-    console.log(yourMovie.stock)
+    console.log(yourMovie.stock);
     yourMovie.stock = yourMovie.stock + 1;
     console.log(yourMovie.id);
     this.yourMoviesService
@@ -29,8 +29,6 @@ export class YourMoviesComponent implements OnInit {
           (this.yourMovies = this.yourMovies.filter(
             (m) => m.id !== yourMovie.id
           ))
-          
       );
-      
   }
 }

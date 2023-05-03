@@ -1,5 +1,5 @@
 import { Injectable, Input } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from '../user';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
 import { TrackError } from '../trackError';
@@ -36,25 +36,9 @@ export class UserService {
   }
 
 
-  getUser(id: number): Observable<User> {    
-    return this.http.get<User>(`${this.apiUrl}/${id}`, {      
-      headers: new HttpHeaders({
-        'Accept': 'application/json',
-        'Authorization': 'my-token'
-      })
-    })
-    // .pipe(
-    //   map(u => <User> {
-    //     id: u.id,
-    //     firstName: u.firstName,
-    //     surname: u.surname,
-    //     email: u.email,
-    //     confirmEmail: u.confirmEmail,
-    //     password: u.password,
-    //     confirmPassword: u.confirmPassword
-    //   }),
-    //   tap(user => console.log(user))
-    // );
+  getUserByEmail(email: string): Observable<User> {
+    const params = new HttpParams().set('email', email);
+    return this.http.get<User>(`${this.apiUrl}`, { params });
   }
 
   isLoggedIn() {

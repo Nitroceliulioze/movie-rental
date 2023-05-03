@@ -57,12 +57,34 @@
       "stock": 0
     }
   ],
-  "your-movies": [],
+  "your-movies": [
+    {
+      "id": 2,
+      "title": "Superman",
+      "genre": "Action",
+      "price": 4.55,
+      "stock": 3
+    },
+    {
+      "id": 4,
+      "title": "Little mermaid",
+      "genre": "Amination",
+      "price": 3.5,
+      "stock": 4
+    },
+    {
+      "id": 7,
+      "title": "Star Wars",
+      "genre": "Action",
+      "price": 6,
+      "stock": 11
+    }
+  ],
   "users": [
     {
       "id": 1,
       "firstName": "Diana",
-      "surname": "zukauskiene",
+      "surname": "Zukauskiene",
       "email": "diana@email.com",
       "confirmEmail": "diana@email.com",
       "password": "diana123",
@@ -79,12 +101,21 @@
     },
     {
       "id": 3,
-      "firstName": "Monika",
-      "surname": "Kukul",
+      "firstName": "Test",
+      "surname": "Test",
       "email": "test@test.com",
       "confirmEmail": "test@test.com",
-      "password": "test1234",
-      "confirmPassword": "test1234"
+      "password": "testtest",
+      "confirmPassword": "testtest"
+    },
+    {
+      "id": 4,
+      "firstName": "Olga",
+      "surname": "Vo",
+      "email": "olga@test.lt",
+      "confirmEmail": "olga@test.lt",
+      "password": "olgatest123",
+      "confirmPassword": "olgatest123"
     }
   ]
 }

@@ -27,15 +27,16 @@ function passwordMatcher(
   c: AbstractControl
 ): { [key: string]: boolean } | null {
   const passwordControl = c.get('password');
-  const confirmPassControl = c.get('confirmPassword');
+  const confirmControl = c.get('confirmPassword');
 
-  if (passwordControl?.pristine || confirmPassControl?.pristine) {
+  if (passwordControl?.pristine || confirmControl?.pristine) {
     return null;
   }
 
-  if (passwordControl?.value === confirmPassControl?.value) {
+  if (passwordControl?.value === confirmControl?.value) {
     return null;
   }
+
   return { match: true };
 }
 
@@ -84,79 +85,154 @@ export class RegisterComponent implements OnInit {
         email: this.registerForm.value.registerEmailGroup.email,
         confirmEmail: this.registerForm.value.registerEmailGroup.confirmEmail,
         password: this.registerForm.value.registerPasswordGroup.password,
-        confirmPassword: this.registerForm.value.registerPasswordGroup.confirmPassword,
+        confirmPassword:
+          this.registerForm.value.registerPasswordGroup.confirmPassword,
       };
 
-      console.log(newUser)
+      console.log(newUser);
 
-     this.service.saveUser(newUser).subscribe(() => {
+      this.service.saveUser(newUser).subscribe(() => {
         alert(`${newUser.firstName} has been registered`);
-        this.router.navigate(['/welcome'])
+        this.router.navigate(['/welcome']);
       });
     }
   }
 
-  getErrorMessage(): string[] {
-    const messages: string[] = [];
+  getNameErrorMessage() {
+    if (this.registerForm.get('firstName')?.hasError('required')) {
+      return 'First name is required.';
+    }
+    return this.registerForm.get('firstName')?.hasError('minlength')
+      ? 'First name must be at least 2 characters long.'
+      : '';
+  }
 
-    const firstNameControl = this.registerForm.get('firstName');
-    if (firstNameControl?.hasError('required')) {
-      messages.push('First name is required.');
+  getSurnameErrorMessage() {
+    if (this.registerForm.get('surname')?.hasError('required')) {
+      return 'Surname is required.';
     }
-    if (firstNameControl?.hasError('minlength')) {
-      messages.push('First name must be at least 2 characters long.');
-    }
+    return this.registerForm.get('surname')?.hasError('minlength')
+      ? 'Surname must be at least 2 characters long.'
+      : '';
+  }
 
-    const surnameControl = this.registerForm.get('surname');
-    if (surnameControl?.hasError('required')) {
-      messages.push('Surname is required.');
-    }
-    if (surnameControl?.hasError('minlength')) {
-      messages.push('Surname must be at least 2 characters long.');
-    }
-
-    const email1Control = this.registerForm.get('registerEmailGroup.email');
-    if (email1Control?.hasError('required')) {
-      messages.push('Email is required.');
-    }
-    if (email1Control?.hasError('email')) {
-      messages.push('Email is not valid.');
+  getEmailErrorMessage() {
+    if (
+      this.registerForm.get('registerEmailGroup.email')?.hasError('required')
+    ) {
+      return 'You must enter a value';
     }
 
-    const email2Control = this.registerForm.get(
-      'registerEmailGroup.confirmEmail'
-    );
-    if (email2Control?.hasError('required')) {
-      messages.push('Confirm email is required.');
+    return this.registerForm.get('registerEmailGroup.email')?.hasError('email')
+      ? 'Not a valid email'
+      : '';
+  }
+
+  getConfirmEmailErrorMessage() {
+    // if (this.registerForm.get('registerEmailGroup.confirmEmail')?.hasError('required')) {
+    //   return 'You must enter a value';
+    // }
+    if (this.registerForm.get('registerEmailGroup')?.hasError('match')) {
+      ('Emails do not match.');
+    }
+    return '';
+    // return this.registerForm.get('registerEmailGroup')?.hasError('match')
+    //   ? ''
+    //   : ;
+  }
+
+  getPasswordErrorMessage() {
+    console.log(this.registerForm.get('registerPasswordGroup')?.errors);
+    if (
+      this.registerForm
+        .get('registerPasswordGroup.password')
+        ?.hasError('required')
+    ) {
+      return 'You must enter a value';
     }
 
-    const passwordControl = this.registerForm.get(
-      'registerPasswordGroup.password'
-    );
-    if (passwordControl?.hasError('required')) {
-      messages.push('Password is required.');
-    }
-    if (passwordControl?.hasError('minlength')) {
-      messages.push('Password must be at least 8 characters long.');
-    }
+    return this.registerForm
+      .get('registerPasswordGroup.password')
+      ?.hasError('minlength')
+      ? 'Password must be at least 8 characters long.'
+      : '';
+  }
 
-    const password2Control = this.registerForm.get(
-      'registerPasswordGroup.confirmPassword'
-    );
-    if (password2Control?.hasError('required')) {
-      messages.push('Confirm password is required.');
+  getPasswordConfirmErrorMessage() {
+    if (
+      this.registerForm
+        .get('registerPasswordGroup.confirmPassword')
+        ?.hasError('required')
+    ) {
+      return 'You must enter a value';
     }
-
-    const emailGroupControl = this.registerForm.get('registerEmailGroup');
-    if (emailGroupControl?.errors?.['emailMatcher']) {
-      messages.push('Emails do not match.');
-    }
-
-    const passwordGroupControl = this.registerForm.get('registerPasswordGroup');
-    if (passwordGroupControl?.errors?.['passwordMatcher']) {
-      messages.push('Passwords do not match.');
-    }
-
-    return messages;
+    return this.registerForm.get('registerPasswordGroup')?.hasError('match')
+      ? 'Passwords do not match.'
+      : '';
   }
 }
+
+//   getErrorMessage(): string[] {
+//     const messages: string[] = [];
+
+//     const firstNameControl = this.registerForm.get('firstName');
+//     if (firstNameControl?.hasError('required')) {
+//       messages.push('First name is required.');
+//     }
+//     if (firstNameControl?.hasError('minlength')) {
+//       messages.push('First name must be at least 2 characters long.');
+//     }
+
+//     const surnameControl = this.registerForm.get('surname');
+//     if (surnameControl?.hasError('required')) {
+//       messages.push('Surname is required.');
+//     }
+//     if (surnameControl?.hasError('minlength')) {
+//       messages.push('Surname must be at least 2 characters long.');
+//     }
+
+//     const email1Control = this.registerForm.get('registerEmailGroup.email');
+//     if (email1Control?.hasError('required')) {
+//       messages.push('Email is required.');
+//     }
+//     if (email1Control?.hasError('email')) {
+//       messages.push('Email is not valid.');
+//     }
+
+//     const email2Control = this.registerForm.get(
+//       'registerEmailGroup.confirmEmail'
+//     );
+//     if (email2Control?.hasError('required')) {
+//       messages.push('Confirm email is required.');
+//     }
+
+//     const passwordControl = this.registerForm.get(
+//       'registerPasswordGroup.password'
+//     );
+//     if (passwordControl?.hasError('required')) {
+//       messages.push('Password is required.');
+//     }
+//     if (passwordControl?.hasError('minlength')) {
+//       messages.push('Password must be at least 8 characters long.');
+//     }
+
+//     const password2Control = this.registerForm.get(
+//       'registerPasswordGroup.confirmPassword'
+//     );
+//     if (password2Control?.hasError('required')) {
+//       messages.push('Confirm password is required.');
+//     }
+
+//     const emailGroupControl = this.registerForm.get('registerEmailGroup');
+//     if (emailGroupControl?.errors?.['emailMatcher']) {
+//       messages.push('Emails do not match.');
+//     }
+
+//     const passwordGroupControl = this.registerForm.get('registerPasswordGroup');
+//     if (passwordGroupControl?.errors?.['passwordMatcher']) {
+//       messages.push('Passwords do not match.');
+//     }
+
+//     return messages;
+//   }
+// }

@@ -41,17 +41,24 @@ export class SigninComponent implements OnInit {
 
   onSignin() {
     console.log(this.signinForm.value);
-    let userId: number = Number(this.route.snapshot.paramMap.get('id'))
-    console.log(userId) //0 anytime
-    this.service.getUser(userId).subscribe({
-      next: user => this.user = user,
-      error: err => console.log(err),      
-      })
-      if (this.user.password === this.signinForm.value.password) {
-        sessionStorage.setItem('email', this.user.email);
-        sessionStorage.setItem('password', this.user.password);
-        this.router.navigate(['home']);
-      }
-    };
+    const email = this.signinForm.value.email;
+    console.log(email);
+    this.service.getUserByEmail(email).subscribe({
+      next: (users: any) => {
+        const user = users[0];
+        console.log(user);
+        console.log(user.password, this.signinForm.value.password)
+        if (user.password === this.signinForm.value.password) {
+          sessionStorage.setItem('email', user.email);
+          sessionStorage.setItem('password', user.password);
+          console.log('Setting session storage items...');
+          this.router.navigate(['/home']);
+        }
+      },
+      error: err => console.log(err)
+    });
+    
+    
+  }
   
 }
