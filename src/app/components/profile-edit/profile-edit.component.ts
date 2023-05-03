@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/user';
 
@@ -10,9 +11,10 @@ import { User } from 'src/app/user';
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.css'],
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit, OnDestroy {
   editForm!: FormGroup;
   user = new User();
+  private sub!: Subscription;
 
   constructor(private fb: FormBuilder, private service: UserService, private router: Router) {}
 
@@ -27,7 +29,7 @@ export class ProfileEditComponent implements OnInit {
     }, );
 
     const email: any = sessionStorage.getItem('email');
-    this.service.getUserByEmail(email).subscribe({
+    this.sub = this.service.getUserByEmail(email).subscribe({
       next: (users: any) => {
         const user = users[0];
        this.editForm.patchValue({
@@ -40,13 +42,16 @@ export class ProfileEditComponent implements OnInit {
       error: (err) => console.log(err),
     });
   }
-
+ 
 
   updateUser() {
     console.log('save')
     this.router.navigate(['/profile'])
   }
-
+ 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 
   getNameErrorMessage() {
     if (this.editForm.get('firstName')?.hasError('required')) {

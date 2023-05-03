@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
 import { Movie } from '../../Movie';
 
 import { YourMoviesService } from 'src/app/services/your-movies.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movie-item',
@@ -11,14 +12,19 @@ import { YourMoviesService } from 'src/app/services/your-movies.service';
 
   styleUrls: ['./movie-item.component.css'],
 })
-export class MovieItemComponent {
+export class MovieItemComponent implements OnDestroy{
   @Input() movie!: Movie; 
+  private sub!: Subscription;
 
-  constructor(private yourMoviesService: YourMoviesService) {}
+  constructor(private yourMoviesService: YourMoviesService)  {}
 
   addMovie() {
-    this.yourMoviesService.addMovie(this.movie).subscribe(() => {
+    this.sub = this.yourMoviesService.addMovie(this.movie).subscribe(() => {
       alert(`${this.movie.title} has been added to Your Movies`);
     });
   } 
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

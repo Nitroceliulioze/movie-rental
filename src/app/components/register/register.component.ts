@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -6,6 +6,7 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/user';
 
@@ -45,9 +46,10 @@ function passwordMatcher(
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
   registerForm!: FormGroup;
   user = new User();
+  private sub!: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -91,13 +93,16 @@ export class RegisterComponent implements OnInit {
 
       console.log(newUser);
 
-      this.service.saveUser(newUser).subscribe(() => {
+      this.sub = this.service.saveUser(newUser).subscribe(() => {
         alert(`${newUser.firstName} has been registered`);
         this.router.navigate(['/welcome']);
       });
     }
   }
 
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  } 
   getNameErrorMessage() {
     if (this.registerForm.get('firstName')?.hasError('required')) {
       return 'First name is required.';

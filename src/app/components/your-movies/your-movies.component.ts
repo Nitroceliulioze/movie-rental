@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Movie } from 'src/app/Movie';
 import { YourMoviesService } from 'src/app/services/your-movies.service';
 
@@ -7,13 +8,14 @@ import { YourMoviesService } from 'src/app/services/your-movies.service';
   templateUrl: './your-movies.component.html',
   styleUrls: ['./your-movies.component.css'],
 })
-export class YourMoviesComponent implements OnInit {
+export class YourMoviesComponent implements OnInit, OnDestroy {
   yourMovies: Movie[] = [];
+  private sub!: Subscription;
 
   constructor(private yourMoviesService: YourMoviesService) {}
 
   ngOnInit(): void {
-    this.yourMoviesService
+    this.sub = this.yourMoviesService
       .getMovies()
       .subscribe((yourMovies: Movie[]) => (this.yourMovies = yourMovies));
   }
@@ -30,5 +32,9 @@ export class YourMoviesComponent implements OnInit {
             (m) => m.id !== yourMovie.id
           ))
       );
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }

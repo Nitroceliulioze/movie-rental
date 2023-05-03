@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/user';
 
@@ -9,9 +10,10 @@ import { User } from 'src/app/user';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css'],
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, OnDestroy {
   signinForm!: FormGroup;
   user: User = new User();
+  private sub!: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -52,7 +54,7 @@ export class SigninComponent implements OnInit {
     console.log(this.signinForm.value);
     const email = this.signinForm.value.email;
     console.log(email);
-    this.service.getUserByEmail(email).subscribe({
+    this.sub = this.service.getUserByEmail(email).subscribe({
       next: (users: any) => {
         const user = users[0];
         console.log(user);
@@ -66,5 +68,9 @@ export class SigninComponent implements OnInit {
       },
       error: (err) => console.log(err),
     });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
