@@ -25,6 +25,6 @@ export class MovieItemComponent implements OnDestroy{
   } 
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 }

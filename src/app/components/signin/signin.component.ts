@@ -40,7 +40,6 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   getPasswordErrorMessage() {
-    console.log(this.signinForm.get('password')?.errors);
     if (this.signinForm.get('password')?.hasError('required')) {
       return 'You must enter a value';
     }
@@ -64,6 +63,8 @@ export class SigninComponent implements OnInit, OnDestroy {
           sessionStorage.setItem('password', user.password);
           console.log('Setting session storage items...');
           this.router.navigate(['/home']);
+        } else {
+          alert('Password is not correct')
         }
       },
       error: (err) => console.log(err),
@@ -71,6 +72,6 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 }

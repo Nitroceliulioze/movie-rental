@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   } 
   getNameErrorMessage() {
     if (this.registerForm.get('firstName')?.hasError('required')) {
@@ -137,17 +137,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (this.registerForm.get('registerEmailGroup.confirmEmail')?.hasError('required')) {
       return 'You must enter a value';
     }
-    if (this.registerForm.get('registerEmailGroup')?.hasError('match')) {
-      ('Emails do not match.');
-    }
-    return '';
-    // return this.registerForm.get('registerEmailGroup')?.hasError('match')
-    //   ? ''
-    //   : ;
+    return this.registerForm.get('registerEmailGroup')?.hasError('match')
+      ? 'Emails do not match.'
+      : '';
   }
 
   getPasswordErrorMessage() {
-    console.log(this.registerForm.get('registerPasswordGroup')?.errors);
     if (
       this.registerForm
         .get('registerPasswordGroup.password')
