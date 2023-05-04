@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/user';
 
-
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.component.html',
@@ -15,8 +14,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   editForm!: FormGroup;
   user = new User();
   private sub!: Subscription;
+  errorMessage: string = 'cannot update personal information';
 
-  constructor(private fb: FormBuilder, private service: UserService, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private service: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.editForm = this.fb.group({
@@ -26,29 +30,60 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       confirmEmail: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
-    }, );
+    });
 
     const email: any = sessionStorage.getItem('email');
     this.sub = this.service.getUserByEmail(email).subscribe({
       next: (users: any) => {
         const user = users[0];
-       this.editForm.patchValue({
-        firstName: user.firstName,
-        surname: user.surname,
-        email: user.email,
-        password: user.password,
-       })
+        console.log(user);
+        this.editForm.patchValue({
+          firstName: user.firstName,
+          surname: user.surname,
+          email: user.email,
+          password: user.password,
+        });
       },
       error: (err) => console.log(err),
     });
   }
- 
 
   updateUser() {
-    console.log('save')
-    this.router.navigate(['/profile'])
+    const email: any = sessionStorage.getItem('email');
+    const updatedUser: User = { ...this.user, ...this.editForm.value };
+
+    console.log(this.user.confirmPassword, this.editForm.value);
+    this.service.updateUserByEmail(email, updatedUser).subscribe(
+      () => {
+        sessionStorage.setItem('password', updatedUser.password)
+        this.onSaveComplete();
+      },
+      (error) => {
+        this.errorMessage = error;
+      }
+    );
   }
- 
+  // updateUser() {
+  //   const email: any = sessionStorage.getItem('email');
+  //     if (this.editForm.dirty) {
+  //       const u = { ...this.user, ...this.editForm.value};
+  //       this.service.updateUser(email, u).subscribe({
+  //         next: () => this.onSaveComplete(),
+  //         error: err => this.errorMessage = err
+  //       })
+  //     } else {
+  //       this.errorMessage = 'Pease correct the Validation errors'
+  //     }
+
+  //   console.log('save')
+
+  // }
+
+  onSaveComplete() {
+    this.editForm.reset();
+    this.router.navigate(['/profile']);
+  }
+
   ngOnDestroy(): void {
     // this.sub.unsubscribe();
   }
@@ -72,9 +107,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
   getEmailErrorMessage() {
-    if (
-      this.editForm.get('email')?.hasError('required')
-    ) {
+    if (this.editForm.get('email')?.hasError('required')) {
       return 'You must enter a value';
     }
 
@@ -84,21 +117,12 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
   getPasswordErrorMessage() {
-    if (
-      this.editForm
-        .get('password')
-        ?.hasError('required')
-    ) {
+    if (this.editForm.get('password')?.hasError('required')) {
       return 'You must enter a value';
     }
 
-    return this.editForm
-      .get('password')
-      ?.hasError('minlength')
+    return this.editForm.get('password')?.hasError('minlength')
       ? 'Password must be at least 8 characters long.'
       : '';
   }
-
-
-  
 }

@@ -18,17 +18,6 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Edit your email</mat-label>
-        <input
-          matInput
-          formControlName="email"
-        />
-        <mat-error *ngIf="this.editForm.get('email')?.invalid">
-          {{ getEmailErrorMessage() }}
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
         <mat-label>Edit your password</mat-label>
         <input
           matInput

@@ -64,7 +64,7 @@ export class SigninComponent implements OnInit, OnDestroy {
           console.log('Setting session storage items...');
           this.router.navigate(['/home']);
         } else {
-          alert('Password is not correct')
+          alert('Email or password is not correct') //only password is incorrect, how to make error message for email?
         }
       },
       error: (err) => console.log(err),
