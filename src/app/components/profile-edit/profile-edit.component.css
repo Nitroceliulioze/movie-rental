@@ -21,6 +21,7 @@ button {
     width: 150px;
 }
 .mat-mdc-raised-button:not(:disabled) {
+    margin: 2em;
     background-color: #363636 ;
     color:white;
 }
