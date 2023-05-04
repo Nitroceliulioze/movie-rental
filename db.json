@@ -116,6 +116,15 @@
       "confirmEmail": "olga@test.lt",
       "password": "olgatest123",
       "confirmPassword": "olgatest123"
+    },
+    {
+      "id": 5,
+      "firstName": "Benas",
+      "surname": "Bensas",
+      "email": "benas@test.com",
+      "confirmEmail": "benas@test.com",
+      "password": "benas123",
+      "confirmPassword": "benas123"
     }
   ]
 }
