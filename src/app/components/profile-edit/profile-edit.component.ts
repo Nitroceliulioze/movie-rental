@@ -51,33 +51,21 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   updateUser() {
     const email: any = sessionStorage.getItem('email');
     const updatedUser: User = { ...this.user, ...this.editForm.value };
-
-    console.log(this.user.confirmPassword, this.editForm.value);
-    this.service.updateUserByEmail(email, updatedUser).subscribe(
-      () => {
-        sessionStorage.setItem('password', updatedUser.password)
-        this.onSaveComplete();
-      },
-      (error) => {
-        this.errorMessage = error;
-      }
-    );
+    if (this.editForm.dirty) {
+      console.log(this.user.confirmPassword, this.editForm.value);
+      this.service.updateUserByEmail(email, updatedUser).subscribe(
+        () => {
+          sessionStorage.setItem('password', updatedUser.password);
+          this.onSaveComplete();
+        },
+        (error) => {
+          this.errorMessage = error;
+        }
+      );
+    } else {
+      this.errorMessage = 'Pease correct the Validation errors';
+    }
   }
-  // updateUser() {
-  //   const email: any = sessionStorage.getItem('email');
-  //     if (this.editForm.dirty) {
-  //       const u = { ...this.user, ...this.editForm.value};
-  //       this.service.updateUser(email, u).subscribe({
-  //         next: () => this.onSaveComplete(),
-  //         error: err => this.errorMessage = err
-  //       })
-  //     } else {
-  //       this.errorMessage = 'Pease correct the Validation errors'
-  //     }
-
-  //   console.log('save')
-
-  // }
 
   onSaveComplete() {
     this.editForm.reset();
