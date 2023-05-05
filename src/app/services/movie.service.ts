@@ -1,7 +1,7 @@
 import { Injectable, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { Movie } from '../Movie';
+import { MovieInterface } from '../movie.interface';
 
 // const httpOptions = {
 //   headers: new HttpHeaders({
@@ -14,11 +14,11 @@ import { Movie } from '../Movie';
 })
 export class MovieService {
   private apiUrl = 'http://localhost:3000/movies';
-  @Input() movie!: Movie;
+  @Input() movie!: MovieInterface;
 
   constructor(private http: HttpClient) {}
 
-  getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.apiUrl);
+  getMovies(): Observable<MovieInterface[]> {
+    return this.http.get<MovieInterface[]>(this.apiUrl);
   }
 }

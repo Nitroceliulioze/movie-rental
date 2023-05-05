@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ProfileComponent implements OnInit, OnDestroy {
   name!: string;
   surname!: string;
-  email!:string;
+  email!: string;
   private sub!: Subscription;
 
   constructor(private service: UserService) {}
@@ -18,19 +18,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const email: any = sessionStorage.getItem('email');
     console.log(email);
-    this.sub = this.service.getUserByEmail(email).subscribe({
-      next: (users: any) => {
-        const user = users[0];
-        console.log(user);
-        this.name = user.firstName;
-        this.surname = user.surname;
-        this.email = user.email;
-      },
-      error: (err) => console.log(err),
-    });
+    if (email) {
+      this.sub = this.service.getUserByEmail(email).subscribe({
+        next: (users: any) => {
+          const user = users[0];
+          console.log(user);
+          this.name = user.firstName;
+          this.surname = user.surname;
+          this.email = user.email;
+        },
+        error: (err) => console.log(err),
+      });
+    }
   }
 
   ngOnDestroy(): void {
-    // this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 }

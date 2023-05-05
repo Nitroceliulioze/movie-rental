@@ -59,18 +59,18 @@
   ],
   "your-movies": [
     {
-      "id": 6,
-      "title": "Titanic",
-      "genre": "Drama",
-      "price": 7,
-      "stock": 9
-    },
-    {
       "id": 2,
       "title": "Superman",
       "genre": "Action",
       "price": 4.55,
       "stock": 3
+    },
+    {
+      "id": 3,
+      "title": "Aquaman",
+      "genre": "Action",
+      "price": 4.55,
+      "stock": 20
     }
   ],
   "users": [
@@ -109,6 +109,15 @@
       "confirmEmail": "lukas@lukas.lt",
       "password": "lukas1234",
       "confirmPassword": "lukas1234"
+    },
+    {
+      "id": 5,
+      "firstName": "test",
+      "surname": "test",
+      "email": "test@email.com",
+      "confirmEmail": "test@email.com",
+      "password": "test1234",
+      "confirmPassword": "test1234"
     }
   ]
 }

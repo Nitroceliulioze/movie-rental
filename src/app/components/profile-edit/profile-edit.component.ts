@@ -27,46 +27,49 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       surname: ['', [Validators.required, Validators.minLength(2)]],
       email: [''],
-      confirmEmail: ['',],
+      confirmEmail: [''],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: [''],
     });
 
-    const email: any = sessionStorage.getItem('email');
-    this.sub = this.service.getUserByEmail(email).subscribe({
-      next: (users: any) => {
-        const user = users[0];
-        console.log(user);
-        this.editForm.patchValue({
-          firstName: user.firstName,
-          surname: user.surname,
-          email: user.email,
-          password: user.password,
-        });
-      },
-      error: (err) => console.log(err),
-    });
+    const email = sessionStorage.getItem('email');
+    if (email) {
+      this.sub = this.service.getUserByEmail(email).subscribe({
+        next: (users: any) => {
+          const user = users[0];
+          console.log(user);
+          this.editForm.patchValue({
+            firstName: user.firstName,
+            surname: user.surname,
+            email: user.email,
+            password: user.password,
+          });
+        },
+        error: (err) => console.log(err),
+      });
+    }
   }
 
   updateUser() {
-    const email: any = sessionStorage.getItem('email');
+    const email = sessionStorage.getItem('email');
     const updatedUser: User = { ...this.user, ...this.editForm.value };
-    console.log(this.editForm.valid)
-    if (this.editForm.valid) {
-      if (this.editForm.dirty) {
-        console.log(this.user.confirmPassword, this.editForm.value);
-        this.service.updateUserByEmail(email, updatedUser).subscribe({
-          next: () => {
-            sessionStorage.setItem('password', updatedUser.password);
-            this.onSaveComplete();
-          },
-          error: (error) => {
-            this.errorMessage = error;
-          }}
-        );
+    if (email) {
+      if (this.editForm.valid) {
+        if (this.editForm.dirty) {
+          console.log(this.user.confirmPassword, this.editForm.value);
+          this.service.updateUserByEmail(email, updatedUser).subscribe({
+            next: () => {
+              sessionStorage.setItem('password', updatedUser.password);
+              this.onSaveComplete();
+            },
+            error: (error) => {
+              this.errorMessage = error;
+            },
+          });
+        }
+      } else {
+        alert('Please correct the Validation errors');
       }
-    } else {
-      alert('Please correct the Validation errors') ;
     }
   }
 
@@ -76,7 +79,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 
   getNameErrorMessage() {

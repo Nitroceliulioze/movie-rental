@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Movie } from 'src/app/Movie';
+import { MovieInterface } from 'src/app/movie.interface';
 import { YourMoviesService } from 'src/app/services/your-movies.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { YourMoviesService } from 'src/app/services/your-movies.service';
   styleUrls: ['./your-movie-item.component.css'],
 })
 export class YourMovieItemComponent implements OnInit {
-  @Input() yourMovie!: Movie;
-  @Output() deleteMovie: EventEmitter<Movie> = new EventEmitter();
-  yourMovies!: Movie[];
+  @Input() yourMovie!: MovieInterface;
+  @Output() deleteMovie: EventEmitter<MovieInterface> = new EventEmitter();
+  yourMovies!: MovieInterface[];
   time: number = 12;
   newPrice!: number;
 
@@ -45,7 +45,7 @@ export class YourMovieItemComponent implements OnInit {
     }
   }
 
-  removeMovie(yourMovie: Movie) {
+  removeMovie(yourMovie: MovieInterface) {
     this.deleteMovie.emit(yourMovie);
   }
 }
