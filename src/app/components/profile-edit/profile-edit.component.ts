@@ -55,14 +55,14 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     if (this.editForm.valid) {
       if (this.editForm.dirty) {
         console.log(this.user.confirmPassword, this.editForm.value);
-        this.service.updateUserByEmail(email, updatedUser).subscribe(
-          () => {
+        this.service.updateUserByEmail(email, updatedUser).subscribe({
+          next: () => {
             sessionStorage.setItem('password', updatedUser.password);
             this.onSaveComplete();
           },
-          (error) => {
+          error: (error) => {
             this.errorMessage = error;
-          }
+          }}
         );
       }
     } else {
