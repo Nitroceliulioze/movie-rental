@@ -40,7 +40,7 @@
       "title": "Titanic",
       "genre": "Drama",
       "price": 7,
-      "stock": 10
+      "stock": 0
     },
     {
       "id": 7,
@@ -54,7 +54,7 @@
       "title": "Game of Thrones",
       "genre": "Fantasy",
       "price": 12,
-      "stock": 0
+      "stock": 2
     }
   ],
   "your-movies": [
@@ -64,6 +64,13 @@
       "genre": "Drama",
       "price": 7,
       "stock": 9
+    },
+    {
+      "id": 2,
+      "title": "Superman",
+      "genre": "Action",
+      "price": 4.55,
+      "stock": 3
     }
   ],
   "users": [
