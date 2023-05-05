@@ -63,7 +63,7 @@ export class UserService {
       switchMap((users) => {
         const existingUser = users.find((user) => user.email === email);
         if (!existingUser) {
-          return throwError(`User with email ${email} not found.`);
+          return throwError(() => new Error(`User with email ${email} not found.`));
         }
         const mergedUser = { ...existingUser, ...updatedUser };
         mergedUser.confirmEmail = existingUser.email;
@@ -77,13 +77,13 @@ export class UserService {
           map(() => mergedUser),
           catchError((error) => {
             console.error(error);
-            return throwError('Could not update user.');
+            return throwError(() => new Error('Could not update user.'));
           })
         );
       }),
       catchError((error) => {
         console.error(error);
-        return throwError('Could not get users.');
+        return throwError(() => new Error('Could not get users.'));
       })
     );
   }

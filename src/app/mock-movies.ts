@@ -1,6 +1,6 @@
-import { Movie } from "./movie.interface";
+import { MovieInterface } from "./movie.interface";
 
-export const MOVIES: Movie[] = [
+export const MOVIES: MovieInterface[] = [
   {
     id: 1,
     title: 'Batman',

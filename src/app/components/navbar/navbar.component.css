@@ -1,6 +1,7 @@
 .navbar-container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: space-between;
     border-radius: 25px;
     margin:auto;
     width: 80%;
@@ -17,5 +18,5 @@
 }
 
 #logout {
-    flex-grow: 1;
+
 }
