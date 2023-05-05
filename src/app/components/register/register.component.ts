@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   } 
   getNameErrorMessage() {
     if (this.registerForm.get('firstName')?.hasError('required')) {

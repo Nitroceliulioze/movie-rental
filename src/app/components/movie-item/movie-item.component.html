@@ -1,5 +1,13 @@
 <div class="home-container">
-  <table>
+  <div class="table-row">
+    <div class="row-item">{{ movie.title }}</div>
+    <div class="row-item">{{ movie.genre }}</div>
+    <div class="row-item">{{ movie.price | currency }}</div>
+    <div class="row-item"><img class="check-img" src="{{ movie.stock == 0 ? '../../../assets/images/cross.png' :'../../../assets/images/check.png'}}" /></div>
+    <div class="row-item"><app-button (click)="addMovie()" class="button-rent" text="Rent"></app-button></div>
+  </div>
+  
+  <!-- <table>
     <tr id="movie-row">
       <td>{{ movie.title }}</td>
       <td>{{ movie.genre }}</td>
@@ -10,5 +18,5 @@
       </td>
       <app-button (click)="addMovie()" class="button-rent" text="Rent"></app-button>
     </tr>
-  </table>
+  </table> -->
 </div>
