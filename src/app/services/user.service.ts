@@ -78,6 +78,8 @@ export class UserService {
           catchError((error) => {
             console.error(error);
             return throwError(() => new Error('Could not update user.'));
+            // arba vietoj sitos (80) eilutes butu galima parasyt 
+            // throw new Error('Could not update user.')
           })
         );
       }),
