@@ -1,15 +1,13 @@
 <app-navbar></app-navbar>
 <div class="main-container">
   <h2 class="home-name">Available Movies</h2>
-  <table>
-    <tr>
-        <th>Name</th>
-        <th>Genre</th>
-        <th>Price for 12h</th>
-        <th>Is in stock</th>
-        <th></th>
-      </tr>
-    </table>
-      <app-movie-item *ngFor="let movie of movies" [movie]="movie"></app-movie-item>
-      
+  <div class="table-row">
+    <div class="row-item">Name</div>
+    <div class="row-item">Genre</div>
+    <div class="row-item">Price for 12h</div>
+    <div class="row-item">Is in stock</div>
+    <div class="row-item"></div>
+  </div>
+
+  <app-movie-item *ngFor="let movie of movies" [movie]="movie"></app-movie-item>
 </div>

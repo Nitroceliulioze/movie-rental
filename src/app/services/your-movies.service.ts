@@ -1,7 +1,7 @@
 import { Injectable, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap, throwError  } from 'rxjs';
-import { Movie } from '../Movie';
+import { MovieInterface } from '../movie.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -9,16 +9,16 @@ import { Movie } from '../Movie';
 export class YourMoviesService {
   private apiUrl = 'http://localhost:3000/your-movies';
   yourMovies: any = [];
-  @Input() movie!: Movie;
-  yourMovie!: Movie;
+  @Input() movie!: MovieInterface;
+  yourMovie!: MovieInterface;
 
   constructor(private http: HttpClient) {}
 
-  addMovie(movie: Movie): Observable<Movie> {
+  addMovie(movie: MovieInterface): Observable<MovieInterface> {
     if (movie.stock >= 1) {
       console.log(movie.stock)
       movie.stock = movie.stock - 1;
-      return this.http.post<Movie>(this.apiUrl, movie).pipe(
+      return this.http.post<MovieInterface>(this.apiUrl, movie).pipe(
         tap((newMovie) => {
           this.yourMovies.push(newMovie);
         })
@@ -31,15 +31,15 @@ export class YourMoviesService {
     }
   }
 
-  getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.apiUrl);
+  getMovies(): Observable<MovieInterface[]> {
+    return this.http.get<MovieInterface[]>(this.apiUrl);
   }
 
-  deleteMovie(yourMovie: Movie): Observable<{}> {
+  deleteMovie(yourMovie: MovieInterface): Observable<{}> {
     console.log(yourMovie.id);
     yourMovie.stock = yourMovie.stock + 1;
     const url = `${this.apiUrl}/${yourMovie.id}`;
     alert(`${yourMovie.title} has been deleted from Your Movies`);
-    return this.http.delete<Movie>(url);
+    return this.http.delete<MovieInterface>(url);
   }
 }

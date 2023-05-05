@@ -2,7 +2,16 @@
     background-color: white;
     border-radius: 25px;
 }
-table {
+.table-row{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    width: 100%;
+}
+.row-item {
+    width: 20%;
+}
+/* table {
     width: 100%;
     border-spacing: 0 1em;
     table-layout: fixed;
@@ -12,7 +21,7 @@ td {
     text-align: left;
     padding-inline: 2em;
     
-}
+} */
 
 .check-img {
     margin-left:1.5em;    

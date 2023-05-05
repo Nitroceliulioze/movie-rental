@@ -1,20 +1,20 @@
 <div class="home-container">
-  <table>
-    <tr id="movie-row">
-      <td>{{ yourMovie.title }}</td>
-      <td>{{ yourMovie.genre }}</td>
-      <td>
+
+    <div class="movie-row">
+      <div class="row-item">{{ yourMovie.title }}</div>
+      <div class="row-item">{{ yourMovie.genre }}</div>
+      <div class="row-item">
         <span class="sign prev" (click)="removeTime()">&#60;</span
         ><span class="time" id="time"> {{ time }} </span
         ><span class="sign next" id="next" (click)="addTime()">&#62;</span>
-      </td>
-      <td>{{ newPrice | currency }}</td>
-
-      <app-button
+      </div>
+      <div class="row-item">{{ newPrice | currency }}</div>
+      <div class="row-item"> <app-button
         (click)="removeMovie(yourMovie)"
         class="button-rent"
         text="Remove"
-      ></app-button>
-    </tr>
-  </table>
+      ></app-button></div>
+      
+    </div>
+
 </div>

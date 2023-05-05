@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Movie } from 'src/app/Movie';
+import { MovieInterface } from 'src/app/movie.interface';
 import { YourMoviesService } from 'src/app/services/your-movies.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { YourMoviesService } from 'src/app/services/your-movies.service';
   styleUrls: ['./your-movies.component.css'],
 })
 export class YourMoviesComponent implements OnInit, OnDestroy {
-  yourMovies: Movie[] = [];
+  yourMovies: MovieInterface[] = [];
   private sub!: Subscription;
 
   constructor(private yourMoviesService: YourMoviesService) {}
@@ -17,10 +17,10 @@ export class YourMoviesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.yourMoviesService
       .getMovies()
-      .subscribe((yourMovies: Movie[]) => (this.yourMovies = yourMovies));
+      .subscribe((yourMovies: MovieInterface[]) => (this.yourMovies = yourMovies));
   }
 
-  deleteMovie(yourMovie: Movie) {
+  deleteMovie(yourMovie: MovieInterface) {
     console.log(yourMovie.stock);
     yourMovie.stock = yourMovie.stock + 1;
     console.log(yourMovie.id);
@@ -35,6 +35,6 @@ export class YourMoviesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // this.sub.unsubscribe();
+    this.sub.unsubscribe();
   }
 }

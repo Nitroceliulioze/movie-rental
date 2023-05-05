@@ -1,16 +1,14 @@
 <div class="navbar-container">
     <mat-toolbar color="accent">
-      <button mat-icon-button class="navbar-item" aria-label="Example icon-button with share icon" routerLink="/home">
-        Home
-      </button>
-      <button mat-icon-button class="navbar-item" aria-label="Example icon-button with share icon" routerLink="/your-movies">
-        Your movies
-      </button>
-      <button mat-icon-button class="navbar-item" aria-label="Example icon-button with share icon" routerLink="/profile">
-        Profile
-      </button>
+      <button *ngFor="let item of navbarItems" mat-icon-button class="navbar-item" [attr.aria-label]="item.ariaLabel" [routerLink]="item.link" >
+        {{ item.label }} </button>
+<!--        
+   kazkodel yra TS erroras jei bandau pritaikyt sita: 
+   (click)="item.clickHandler && this[item.clickHandler]()"
+   
+-->
       <button mat-icon-button class="navbar-item" id="logout" aria-label="Example icon-button with share icon" (click)="logout()" routerLink="/welcome">
         Log Out
-      </button>
+      </button> 
     </mat-toolbar>
 </div>

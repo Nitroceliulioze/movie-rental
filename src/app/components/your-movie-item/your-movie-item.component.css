@@ -2,7 +2,18 @@
     background-color: white;
     border-radius:20px
 }
-
+.movie-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 1em 0;
+}
+.row-item {
+    width: 20%;
+    margin-left: 0.5em;
+    
+}
+/* 
 table {
     width: 100%;
     border-spacing: 0 1em;
@@ -13,7 +24,7 @@ th,
 td {
     text-align: left;
     padding-inline: 2em;
-}
+} */
 
 .check-img {
     margin-left:1.5em;    

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
-import { Movie } from '../../Movie';
+import { MovieInterface } from '../../movie.interface';
 
 import { YourMoviesService } from 'src/app/services/your-movies.service';
 import { Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./movie-item.component.css'],
 })
 export class MovieItemComponent implements OnDestroy{
-  @Input() movie!: Movie; 
+  @Input() movie!: MovieInterface; 
   private sub!: Subscription;
 
   constructor(private yourMoviesService: YourMoviesService)  {}
@@ -25,6 +25,7 @@ export class MovieItemComponent implements OnDestroy{
   } 
 
   ngOnDestroy(): void {
-    // this.sub.unsubscribe();
+    // this.sub.unsubscribe(); 
+    // if uncommented HERE APP CRASHES
   }
 }
