@@ -59,25 +59,11 @@
   ],
   "your-movies": [
     {
-      "id": 2,
-      "title": "Superman",
-      "genre": "Action",
-      "price": 4.55,
-      "stock": 3
-    },
-    {
-      "id": 4,
-      "title": "Little mermaid",
-      "genre": "Amination",
-      "price": 3.5,
-      "stock": 4
-    },
-    {
-      "id": 7,
-      "title": "Star Wars",
-      "genre": "Action",
-      "price": 6,
-      "stock": 11
+      "id": 6,
+      "title": "Titanic",
+      "genre": "Drama",
+      "price": 7,
+      "stock": 9
     }
   ],
   "users": [
@@ -92,39 +78,30 @@
     },
     {
       "id": 2,
-      "firstName": "marius",
-      "surname": "zukauskas",
+      "firstName": "Marius",
+      "surname": "Zukauskas",
       "email": "marius@marius.lt",
       "confirmEmail": "marius@marius.lt",
-      "password": "diana123",
-      "confirmPassword": "diana123"
+      "password": "marius123",
+      "confirmPassword": "marius123"
     },
     {
       "id": 3,
-      "firstName": "Test",
-      "surname": "Test",
-      "email": "test@test.com",
-      "confirmEmail": "test@test.com",
-      "password": "testtest",
-      "confirmPassword": "testtest"
+      "firstName": "Giedre",
+      "surname": "pavarde",
+      "email": "giedre@test.lt",
+      "confirmEmail": "giedre@test.lt",
+      "password": "giedre1234",
+      "confirmPassword": "giedre1234"
     },
     {
       "id": 4,
-      "firstName": "Olga",
-      "surname": "Vo",
-      "email": "olga@test.lt",
-      "confirmEmail": "olga@test.lt",
-      "password": "olgatest123",
-      "confirmPassword": "olgatest123"
-    },
-    {
-      "id": 5,
-      "firstName": "Benas",
-      "surname": "Bensas",
-      "email": "benas@test.com",
-      "confirmEmail": "benas@test.com",
-      "password": "benas123",
-      "confirmPassword": "benas123"
+      "firstName": "Lukutis",
+      "surname": "Zukauskas",
+      "email": "lukas@lukas.lt",
+      "confirmEmail": "lukas@lukas.lt",
+      "password": "lukas1234",
+      "confirmPassword": "lukas1234"
     }
   ]
 }

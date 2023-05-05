@@ -26,10 +26,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this.editForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       surname: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      confirmEmail: ['', [Validators.required]],
+      email: [''],
+      confirmEmail: ['',],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required],
+      confirmPassword: [''],
     });
 
     const email: any = sessionStorage.getItem('email');
@@ -51,6 +51,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   updateUser() {
     const email: any = sessionStorage.getItem('email');
     const updatedUser: User = { ...this.user, ...this.editForm.value };
+    console.log(this.editForm.valid)
     if (this.editForm.valid) {
       if (this.editForm.dirty) {
         console.log(this.user.confirmPassword, this.editForm.value);
@@ -65,7 +66,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         );
       }
     } else {
-      this.errorMessage = 'Pease correct the Validation errors';
+      alert('Please correct the Validation errors') ;
     }
   }
 

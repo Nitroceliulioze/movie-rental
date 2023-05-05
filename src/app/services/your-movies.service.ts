@@ -35,7 +35,7 @@ export class YourMoviesService {
     return this.http.get<Movie[]>(this.apiUrl);
   }
 
-  deleteMovie(yourMovie: Movie): Observable<Movie> {
+  deleteMovie(yourMovie: Movie): Observable<{}> {
     console.log(yourMovie.id);
     yourMovie.stock = yourMovie.stock + 1;
     const url = `${this.apiUrl}/${yourMovie.id}`;
